@@ -1,10 +1,10 @@
 ExternalProject_Add(
 	ode
 	#GIT_REPOSITORY https://bitbucket.org/odedevs/ode.git
-	#GIT_TAG 0.16.5
-	URL https://bitbucket.org/odedevs/ode/downloads/ode-0.16.5.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/ode-0.16.5.tar.gz
-	URL_MD5 a4adcd39237b2ba813184c7148f3c895
+	#GIT_TAG 0.16.6
+	URL https://bitbucket.org/odedevs/ode/downloads/ode-0.16.6.tar.gz
+	#URL ${CMAKE_CURRENT_SOURCE_DIR}/ode-0.16.6.tar.gz
+	URL_MD5 410b78019a4de9736026ea7303d66da4
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
