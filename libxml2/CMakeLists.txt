@@ -2,10 +2,10 @@ ExternalProject_Add(
 	libxml2
 	DEPENDS libiconv
 	#GIT_REPOSITORY https://gitlab.gnome.org/GNOME/libxml2.git
-	#GIT_TAG v2.13.3
-	URL https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.13.3/libxml2-v2.13.3.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/libxml2-v2.13.3.tar.gz
-	URL_MD5 f312e123df5096472359b430836f653e
+	#GIT_TAG v2.14.1
+	URL https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.14.1/libxml2-v2.14.1.tar.gz
+	#URL ${CMAKE_CURRENT_SOURCE_DIR}/libxml2-v2.14.1.tar.gz
+	URL_MD5 6216176e209f2f6d7b9a5b3753948e47
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
