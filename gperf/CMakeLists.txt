@@ -1,10 +1,10 @@
 ExternalProject_Add(
 	gperf
 	#GIT_REPOSITORY https://github.com/roboticslibrary/gperf.git
-	#GIT_TAG cmake-3.1
-	URL https://github.com/roboticslibrary/gperf/archive/cmake-3.1.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/gperf-cmake-3.1.tar.gz
-	URL_MD5 ccdc42c8b534061030d49bb9cae9cfd5
+	#GIT_TAG cmake-3.2
+	URL https://github.com/roboticslibrary/gperf/archive/cmake-3.2.tar.gz
+	#URL ${CMAKE_CURRENT_SOURCE_DIR}/gperf-cmake-3.2.tar.gz
+	URL_MD5 e5ab2653327cb9af9bb0fdd1ddd6e92e
 	CMAKE_ARGS
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		-DCMAKE_CFG_INTDIR=${CMAKE_CFG_INTDIR}
