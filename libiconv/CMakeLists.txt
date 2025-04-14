@@ -2,10 +2,10 @@ ExternalProject_Add(
 	libiconv
 	DEPENDS gperf
 	#GIT_REPOSITORY https://github.com/roboticslibrary/libiconv.git
-	#GIT_TAG cmake-1.17
-	URL https://github.com/roboticslibrary/libiconv/archive/cmake-1.17.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/libiconv-cmake-1.17.tar.gz
-	URL_MD5 314a992d88ad82f9afd159a1dbd3d433
+	#GIT_TAG cmake-1.18
+	URL https://github.com/roboticslibrary/libiconv/archive/cmake-1.18.tar.gz
+	#URL ${CMAKE_CURRENT_SOURCE_DIR}/libiconv-cmake-1.18.tar.gz
+	URL_MD5 56143622ed2d6ef746d3b24eaba7e96b
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
