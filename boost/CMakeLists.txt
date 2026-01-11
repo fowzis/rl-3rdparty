@@ -1,7 +1,7 @@
 ExternalProject_Add(
 	boost
-	URL https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.7z
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/boost-1.88.0-cmake.7z
+	#URL https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.7z
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/boost/boost-1.88.0-cmake.7z
 	URL_MD5 1c4d719004087d7e57198a2511e859bf
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}

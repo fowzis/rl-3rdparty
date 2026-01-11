@@ -2,8 +2,8 @@ ExternalProject_Add(
 	nlopt
 	#GIT_REPOSITORY https://github.com/stevengj/nlopt.git
 	#GIT_TAG 2.10.0
-	URL https://github.com/stevengj/nlopt/archive/v2.10.0.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/nlopt-2.10.0.tar.gz
+	#URL https://github.com/stevengj/nlopt/archive/v2.10.0.tar.gz
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/nlopt/nlopt-2.10.0.tar.gz
 	URL_MD5 3ca4da30e723c3b14e9f9e198ce43a02
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}

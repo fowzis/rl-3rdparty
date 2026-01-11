@@ -2,8 +2,8 @@ ExternalProject_Add(
 	superglu
 	#GIT_REPOSITORY https://github.com/coin3d/superglu.git
 	#GIT_TAG v1.3.2
-	URL https://github.com/coin3d/superglu/releases/download/v1.3.2/superglu-1.3.2-src.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/superglu-1.3.2-src.tar.gz
+	#URL https://github.com/coin3d/superglu/releases/download/v1.3.2/superglu-1.3.2-src.tar.gz
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/superglu/superglu-1.3.2-src.tar.gz
 	URL_MD5 3ee85c260592967f68f67db7ddb58caa
 	CMAKE_ARGS
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}

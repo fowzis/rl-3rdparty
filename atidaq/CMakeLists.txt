@@ -2,8 +2,8 @@ ExternalProject_Add(
 	atidaq
 	#GIT_REPOSITORY https://github.com/roboticslibrary/atidaq.git
 	#GIT_TAG cmake-1.0.6
-	URL https://github.com/roboticslibrary/atidaq/archive/cmake-1.0.6.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/atidaq-cmake-1.0.6.tar.gz
+	#URL https://github.com/roboticslibrary/atidaq/archive/cmake-1.0.6.tar.gz
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/ATI/atidaq-cmake-1.0.6.tar.gz
 	URL_MD5 eaa48a43cf5773e509f3e5af7a7e02fa
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}

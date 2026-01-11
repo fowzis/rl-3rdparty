@@ -2,8 +2,8 @@ ExternalProject_Add(
 	solid3
 	#GIT_REPOSITORY https://github.com/dtecta/solid3.git
 	#GIT_TAG cbac1402da5df65e7239558a6c04feb736e54b27
-	URL https://github.com/dtecta/solid3/archive/cbac1402da5df65e7239558a6c04feb736e54b27.zip
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/solid3-cbac1402da5df65e7239558a6c04feb736e54b27.tar.gz
+	#URL https://github.com/dtecta/solid3/archive/cbac1402da5df65e7239558a6c04feb736e54b27.zip
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/solid/solid3-cbac1402da5df65e7239558a6c04feb736e54b27.zip
 	URL_MD5 b566a0732d8c267b0d65b461914d6fc0
 	CMAKE_ARGS
 		-DBUILD_EXAMPLES=OFF

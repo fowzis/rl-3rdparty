@@ -2,8 +2,8 @@ ExternalProject_Add(
 	libccd
 	#GIT_REPOSITORY https://github.com/danfis/libccd.git
 	#GIT_TAG v2.1
-	URL https://github.com/danfis/libccd/archive/v2.1.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/libccd-2.1.tar.gz
+	#URL https://github.com/danfis/libccd/archive/v2.1.tar.gz
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/libccd/libccd-2.1.tar.gz
 	URL_MD5 fe8ea5024956044a3af6bcbab312950f
 	CMAKE_ARGS
 		-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}

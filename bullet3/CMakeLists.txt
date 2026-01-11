@@ -1,16 +1,24 @@
+# Disable extras when building shared libraries to avoid Winsock2 linking issues
+if(BUILD_SHARED_LIBS)
+	set(BULLET_BUILD_EXTRAS OFF)
+else()
+	set(BULLET_BUILD_EXTRAS ON)
+endif()
+
 ExternalProject_Add(
 	bullet3
 	#GIT_REPOSITORY https://github.com/bulletphysics/bullet3.git
 	#GIT_TAG 3.25
-	URL https://github.com/bulletphysics/bullet3/archive/refs/tags/3.25.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/bullet3-3.25.tar.gz
+	#URL https://github.com/bulletphysics/bullet3/archive/refs/tags/3.25.tar.gz
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/bullet/bullet3-3.25.tar.gz
 	URL_MD5 38f14ac1c89e6badfa3fb427baadf3a9
 	CMAKE_ARGS
 		-DBUILD_BULLET2_DEMOS=OFF
 		-DBUILD_CPU_DEMOS=OFF
-		-DBUILD_EXTRAS=ON
+		-DBUILD_EXTRAS=${BULLET_BUILD_EXTRAS}
 		-DBUILD_OPENGL3_DEMOS=OFF
 		-DBUILD_PYBULLET=OFF
+		#-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}
 		-DBUILD_UNIT_TESTS=OFF
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		-DCMAKE_CFG_INTDIR=${CMAKE_CFG_INTDIR}
@@ -18,7 +26,7 @@ ExternalProject_Add(
 		-DCMAKE_POLICY_VERSION_MINIMUM=3.5
 		-DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
 		-DCMAKE_TRY_COMPILE_CONFIGURATION=${CMAKE_TRY_COMPILE_CONFIGURATION}
-		-DINSTALL_EXTRA_LIBS=ON
+		-DINSTALL_EXTRA_LIBS=${BULLET_BUILD_EXTRAS}
 		-DINSTALL_LIBS=ON
 		-DUSE_DOUBLE_PRECISION=ON
 		-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON

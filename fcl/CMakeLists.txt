@@ -3,8 +3,8 @@ ExternalProject_Add(
 	DEPENDS eigen3 libccd
 	#GIT_REPOSITORY https://github.com/flexible-collision-library/fcl.git
 	#GIT_TAG 0.7.0
-	URL https://github.com/flexible-collision-library/fcl/archive/refs/tags/0.7.0.tar.gz
-	#URL ${CMAKE_CURRENT_SOURCE_DIR}/fcl-0.7.0.tar.gz
+	#URL https://github.com/flexible-collision-library/fcl/archive/refs/tags/0.7.0.tar.gz
+	URL ${CMAKE_CURRENT_SOURCE_DIR}/../downloads/fcl/fcl-0.7.0.tar.gz
 	URL_MD5 71cd05e256cca35667360e418d18e7ee
 	CMAKE_ARGS
 		-DBUILD_TESTING=OFF
