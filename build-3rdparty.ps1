@@ -1,5 +1,5 @@
 # PowerShell script to build 3rdparty dependencies for Robotics Library
-# Usage: .\build-3rdparty.ps1 [-InstallPrefix <path>] [-VisualStudioVersion <version>] [-Architecture <x64|x86>] [-Config <Release|Debug>]
+# Usage: .\build-3rdparty.ps1 [-InstallPrefix <path>] [-VisualStudioVersion <version>] [-Architecture <x64|x86>] [-Config <Release|Debug>] [-Clean]
 
 param(
     [string]$InstallPrefix = "$PSScriptRoot\install",
@@ -10,12 +10,59 @@ param(
     [string]$Config = "Release",
     [switch]$SkipBuild,
     [switch]$SkipInstall,
+    [switch]$Clean,  # Clean previous build/install/logs directories before building
     [int]$ParallelJobs = 0  # 0 = use all available cores
 )
 
 $ErrorActionPreference = "Stop"
 
-# Setup logging
+# Clean previous build, install, and logs if requested (do this BEFORE starting transcript)
+if ($Clean) {
+    Write-Host "Cleaning previous build artifacts..." -ForegroundColor Yellow
+    
+    # Remove build directory
+    $buildDir = Join-Path $PSScriptRoot "build"
+    if (Test-Path $buildDir) {
+        Write-Host "  Removing build directory: $buildDir" -ForegroundColor Gray
+        Remove-Item -Path $buildDir -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path $buildDir) {
+            Write-Host "  WARNING: Could not fully remove build directory. Some files may be locked." -ForegroundColor Yellow
+        }
+        else {
+            Write-Host "  Build directory removed." -ForegroundColor Green
+        }
+    }
+    
+    # Remove install directory
+    if (Test-Path $InstallPrefix) {
+        Write-Host "  Removing install directory: $InstallPrefix" -ForegroundColor Gray
+        Remove-Item -Path $InstallPrefix -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path $InstallPrefix) {
+            Write-Host "  WARNING: Could not fully remove install directory. Some files may be locked." -ForegroundColor Yellow
+        }
+        else {
+            Write-Host "  Install directory removed." -ForegroundColor Green
+        }
+    }
+    
+    # Remove logs directory (but keep current session log if transcript is active)
+    $logDir = Join-Path $PSScriptRoot "logs"
+    if (Test-Path $logDir) {
+        Write-Host "  Removing logs directory: $logDir" -ForegroundColor Gray
+        Remove-Item -Path $logDir -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path $logDir) {
+            Write-Host "  WARNING: Could not fully remove logs directory. Some files may be locked." -ForegroundColor Yellow
+        }
+        else {
+            Write-Host "  Logs directory removed." -ForegroundColor Green
+        }
+    }
+    
+    Write-Host "Cleanup complete!" -ForegroundColor Green
+    Write-Host ""
+}
+
+# Setup logging (after cleanup)
 $logDir = Join-Path $PSScriptRoot "logs"
 if (-not (Test-Path $logDir)) {
     New-Item -ItemType Directory -Path $logDir | Out-Null
@@ -57,7 +104,8 @@ if ($cmakeVersionMatch) {
 $generator = "Visual Studio $VisualStudioVersion 2022"
 if ($VisualStudioVersion -eq "16") {
     $generator = "Visual Studio 16 2019"
-} elseif ($VisualStudioVersion -eq "15") {
+}
+elseif ($VisualStudioVersion -eq "15") {
     $generator = "Visual Studio 15 2017"
 }
 
@@ -68,6 +116,7 @@ Write-Host "  Architecture: $Architecture" -ForegroundColor White
 Write-Host "  Configuration: $Config" -ForegroundColor White
 Write-Host "  Install Prefix: $InstallPrefix" -ForegroundColor White
 Write-Host "  Parallel Jobs: $(if ($ParallelJobs -eq 0) { 'All available' } else { $ParallelJobs })" -ForegroundColor White
+Write-Host "  Clean Previous: $(if ($Clean) { 'Yes' } else { 'No' })" -ForegroundColor White
 Write-Host ""
 
 # Check for downloads directory
@@ -139,6 +188,7 @@ try {
         "-DCMAKE_POLICY_VERSION_MINIMUM=3.20"
         "-DCMAKE_INSTALL_PREFIX=`"$InstallPrefix`""
         "-DCMAKE_BUILD_TYPE=$Config"
+        "-DBUILD_SHARED_LIBS=ON"
     )
     
     Write-Host "Running: cmake $($cmakeArgs -join ' ')" -ForegroundColor Gray
@@ -163,7 +213,8 @@ try {
         
         if ($ParallelJobs -gt 0) {
             $buildArgs += "--parallel", $ParallelJobs
-        } else {
+        }
+        else {
             $buildArgs += "--parallel"
         }
         
@@ -178,7 +229,8 @@ try {
         
         Write-Host "Build successful!" -ForegroundColor Green
         Write-Host ""
-    } else {
+    }
+    else {
         Write-Host "Skipping build (--SkipBuild specified)" -ForegroundColor Yellow
         Write-Host ""
     }
@@ -198,12 +250,14 @@ try {
         if ($LASTEXITCODE -ne 0) {
             Write-Host "WARNING: Install failed, but build artifacts are in the build directory" -ForegroundColor Yellow
             Write-Host "See log file for details: $logFile" -ForegroundColor Yellow
-        } else {
+        }
+        else {
             Write-Host "Installation successful!" -ForegroundColor Green
             Write-Host ""
             Write-Host "Dependencies installed to: $InstallPrefix" -ForegroundColor Green
         }
-    } else {
+    }
+    else {
         Write-Host "Skipping install (--SkipInstall specified)" -ForegroundColor Yellow
     }
     
@@ -218,7 +272,8 @@ try {
     Write-Host "Build log saved to: $logFile" -ForegroundColor Gray
     Write-Host ""
     
-} finally {
+}
+finally {
     Pop-Location
     Stop-Transcript | Out-Null
 }
